@@ -19,10 +19,10 @@ else
 $rdo="<A href='consulta4.php?campo=$actual&orden=ASC'>".ucfirst($actual)."</A>";
 return $rdo;
 }
-if ( ! isset ($_POST["campo"]))
+if ( ! isset ($_GET["campo"]))
 $linea1="SELECT * FROM empresas ORDER BY nombre";
 else
-$linea1="SELECT * FROM empresas ORDER BY $_POST[campo] $_POST[orden]";
+$linea1="SELECT * FROM empresas ORDER BY $_GET[campo] $_GET[orden]";
 $consulta=$linea1;
 //echo $consulta;
 if ( ! $link=mysqli_connect('localhost','root',''))
