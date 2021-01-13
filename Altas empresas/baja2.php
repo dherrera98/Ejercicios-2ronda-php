@@ -8,36 +8,35 @@
 </head>
 <body>
 <?php
-import_request_variables("P","f_");
-if ( ! $link=mysql_connect('localhost','root',''))
+if (!$link = mysqli_connect('localhost', 'root', ''))
 {
-echo "<a href=index.html>Error al conectar</a>";
-exit ;
+    echo "<a href=index.html>Error al conectar</a>";
+    exit;
 }
-if ( ! mysql_select_db("buscador"))
+if (!mysqli_select_db($link, "buscador"))
 {
- echo "<a href=index.html>Error al seleccionar BDD</a>";
- exit;
+    echo "<a href=index.html>Error al seleccionar BDD</a>";
+    exit;
 }
-foreach ($f_borrar as $indice => $valor)
+foreach ($_POST["borrar"] as $indice => $valor)
 {
-if ($valor=="on")
-{
-$linea1="DELETE FROM empresas ";
-$linea2=" WHERE id='$indice' ";
-$consulta=$linea1.$linea2;
-//echo "$consulta";
-if ( ! $result=mysql_query($consulta,$link))
-{
-echo "<a href=index.html>Error en el borrardo</a>";
-exit;
-}
-}
+    if ($valor == "on")
+    {
+        $linea1 = "DELETE FROM empresas ";
+        $linea2 = " WHERE id='$indice' ";
+        $consulta = $linea1 . $linea2;
+        //echo "$consulta";
+        if (!$result = mysqli_query($link, $consulta))
+        {
+            echo "<a href=index.html>Error en el borrardo</a>";
+            exit;
+        }
+    }
 }
 echo "<br>Borrado correcto";
 echo "<br><br><a href='baja.php'>Otra baja</a>";
 echo "<br><br><a href='index.html'>Inicio</a>";
-mysql_close($link);
+mysqli_close($link);
 ?>
 </body>
 </html>

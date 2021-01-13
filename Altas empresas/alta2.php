@@ -8,26 +8,26 @@
 </head>
 <body>
 <?php
-$linea1="INSERT INTO empresas (nombre, web, telef, sector,
+$linea1 = "INSERT INTO empresas (nombre, web, telef, sector,
 descrip, karma) ";
-$linea2=" VALUES ('$_POST[nombre]', '$_POST[web]', '$_POST[telef]', '$_POST[sector]',
+$linea2 = " VALUES ('$_POST[nombre]', '$_POST[web]', '$_POST[telef]', '$_POST[sector]',
 '$_POST[descrip]', '$_POST[karma]') ";
-$consulta=$linea1.$linea2;
+$consulta = $linea1 . $linea2;
 //echo $consulta;
-if ( ! $link=mysqli_connect('localhost','root',''))
+if (!$link = mysqli_connect('localhost', 'root', ''))
 {
-echo "<a href=index.html>Error al conectar</a>";
-exit ;
+    echo "<a href=index.html>Error al conectar</a>";
+    exit;
 }
-if ( ! mysqli_select_db($link, "buscador"))
+if (!mysqli_select_db($link, "buscador"))
 {
- echo "<a href=index.html>Error al seleccionar BDD</a>";
- exit;
+    echo "<a href=index.html>Error al seleccionar BDD</a>";
+    exit;
 }
-if ( ! $result=mysqli_query($link, $consulta))
+if (!$result = mysqli_query($link, $consulta))
 {
-echo "<a href=index.html>Error en la consulta</a>";
-exit;
+    echo "<a href=index.html>Error en la consulta</a>";
+    exit;
 }
 echo "<br>Alta correcta";
 echo "<br><br><a href='alta.html'>Otra alta</a>";

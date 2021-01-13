@@ -8,40 +8,42 @@
 </head>
 <body>
 <?php
-$linea1="SELECT * FROM empresas ";
-$consulta=$linea1;
+$linea1 = "SELECT * FROM empresas ";
+$consulta = $linea1;
 //echo $consulta;
-if ( ! $link=mysql_connect('localhost','root',''))
+if (!$link = mysqli_connect('localhost', 'root', ''))
 {
-echo "<a href=index.html>Error al conectar</a>";
-exit ;
+    echo "<a href=index.html>Error al conectar</a>";
+    exit;
 }
-if ( ! mysql_select_db("buscador"))
+if (!mysqli_select_db($link, "buscador"))
 {
- echo "<a href=index.html>Error al seleccionar BDD</a>";
- exit;
+    echo "<a href=index.html>Error al seleccionar BDD</a>";
+    exit;
 }
-if ( ! $result=mysql_query($consulta,$link))
+if (!$result = mysqli_query($link, $consulta))
 {
-echo "<a href=index.html>Error en la consulta</a>";
-exit;
+    echo "<a href=index.html>Error en la consulta</a>";
+    exit;
 }
 echo "<h2>Seleccione empresa/s a dar de baja</h2>";
 echo "<CENTER>";
 echo "<FORM ACTION=baja2.php METHOD=POST>";
 echo "<TABLE BORDER=1>";
-for ($i=0;$i<mysql_numrows($result);$i++)
+for ($i = 0;$i < mysqli_num_rows($result);$i++)
 {
-$id=mysql_result($result,$i,"id");
-$nombre=mysql_result($result,$i,"nombre");
-echo "<TR><TD><INPUT type='checkbox'
+
+    $row = mysqli_fetch_assoc($result);
+    $id = $row["id"];
+    $nombre = $row["nombre"];
+    echo "<TR><TD><INPUT type='checkbox'
 name='borrar[$id]'></TD><TD>$nombre</TD></TR>";
 }
 echo "</TABLE>";
 echo "<INPUT type='submit' value='Borrar'>";
 echo "</FORM>";
 echo "</CENTER>";
-mysql_close($link);
+mysqli_close($link);
 ?>
 </body>
 </html>

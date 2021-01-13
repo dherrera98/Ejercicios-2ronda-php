@@ -8,35 +8,35 @@
 </head>
 <body>
 <?php
-$linea1="SELECT * FROM empresas ";
-$consulta=$linea1;
+$linea1 = "SELECT * FROM empresas ";
+$consulta = $linea1;
 //echo $consulta;
-if ( ! $link=mysqli_connect('localhost','root',''))
+if (!$link = mysqli_connect('localhost', 'root', ''))
 {
-echo "<a href=index.html>Error al conectar</a>";
-exit ;
+    echo "<a href=index.html>Error al conectar</a>";
+    exit;
 }
-if ( ! mysqli_select_db($link, "buscador"))
+if (!mysqli_select_db($link, "buscador"))
 {
- echo "<a href=index.html>Error al seleccionar BDD</a>";
- exit;
+    echo "<a href=index.html>Error al seleccionar BDD</a>";
+    exit;
 }
-if ( ! $result=mysqli_query($link, $consulta))
+if (!$result = mysqli_query($link, $consulta))
 {
-echo "<a href=index.html>Error en la consulta</a>";
-exit;
+    echo "<a href=index.html>Error en la consulta</a>";
+    exit;
 }
 echo "<h2>Seleccione empresa/s a dar modificar</h2>";
 echo "<CENTER>";
 echo "<FORM ACTION=modif2.php METHOD=POST>";
 echo "<TABLE BORDER=1>";
-for ($i=0;$i<mysqli_num_rows($result);$i++)
+for ($i = 0;$i < mysqli_num_rows($result);$i++)
 {
-  $row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_assoc($result);
 
-$id=$row["id"];
-$nombre=$row["nombre"];
-echo "<TR><TD><INPUT type='radio' name='modif'
+    $id = $row["id"];
+    $nombre = $row["nombre"];
+    echo "<TR><TD><INPUT type='radio' name='modif'
 value='$id'></TD><TD>$nombre</TD></TR>";
 }
 echo "</TABLE>";
